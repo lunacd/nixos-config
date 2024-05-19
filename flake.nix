@@ -24,6 +24,10 @@
             wsl.enable = true;
             wsl.defaultUser = username;
 
+            nix.extraOptions = ''
+              experimental-features = nix-command flakes
+            '';
+
             programs = {
               fish.enable = true;
 
