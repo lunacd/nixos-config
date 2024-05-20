@@ -92,7 +92,7 @@
 
                 sessionVariables = {
                   # True color
-                  TERM = "xterm-direct";
+                  COLORTERM = "truecolor";
                   # Prettierd default configuration path
                   PRETTIERD_DEFAULT_CONFIG = "/home/haowenl/.config/haowenl/.prettierrc.json";
                 };
@@ -107,6 +107,9 @@
                   shellAliases = {
                     lg = "lazygit";
                   };
+                  shellInit = ''
+                    set -gx COLORTERM truecolor
+                  '';
                 };
 
                 git = {
