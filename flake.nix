@@ -1,14 +1,18 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }:
+  outputs = { self, nixpkgs, nixos-wsl, home-manager, catppuccin, ... }:
   let
     username = "haowenl";
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -28,20 +32,9 @@
               experimental-features = nix-command flakes
             '';
 
+            # For setting fish as default shell
             programs = {
               fish.enable = true;
-
-              # TODO: on 24.05, use the one from home-manager instead
-              gnupg.agent = {
-                enable = true;
-                pinentryFlavor = "curses";
-                enableSSHSupport = true;
-                # Remember passphrase for a month
-                settings = {
-                  default-cache-ttl = 2592000;
-                  max-cache-ttl = 2592000;
-                };
-              };
             };
 
             virtualisation.podman.enable = true;
@@ -58,12 +51,21 @@
               inherit stateVersion;
             };
           }
+          catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.haowenl = { config, pkgs, ... }:
             {
+              imports = [
+                catppuccin.homeManagerModules.catppuccin
+              ];
+              catppuccin = {
+                flavor = "mocha";
+                accent = "green";
+              };
+
               home = {
                 inherit stateVersion;
                 packages = with pkgs; [
@@ -98,11 +100,22 @@
                 };
               };
 
+              services = {
+                gpg-agent = {
+                  enable = true;
+                  enableSshSupport = true;
+                  defaultCacheTtlSsh = 2592000;
+                  maxCacheTtl = 2592000;
+                  pinentryPackage = pkgs.pinentry-curses;
+                };
+              };
+
               programs = {
-                home-manager.enable = true;
-                
+                gpg.enable = true;
+
                 fish = {
                   enable = true;
+                  catppuccin.enable = true;
 
                   shellAliases = {
                     lg = "lazygit";
@@ -136,26 +149,7 @@
 
                 lazygit = {
                   enable = true;
-                  # Use catppuccin/nix when stable channel is supported
-                  # https://github.com/catppuccin/nix/issues/155
-                  settings = {
-                    gui = {
-                      theme = {
-                        activeBorderColor = [ "#a6e3a1" "bold" ];
-                        inactiveBorderColor = [ "#a6adc8" ];
-                        optionsTextColor = [ "#89b4fa" ];
-                        selectedLineBgColor = [ "#313244" ];
-                        cherryPickedCommitBgColor = [ "#45475a" ];
-                        cherryPickedCommitFgColor = [ "#a6e3a1" ];
-                        unstagedChangesColor = [ "#f38ba8" ];
-                        defaultFgColor = [ "#cdd6f4" ];
-                        searchingActiveBorderColor = [ "#f9e2af" ];
-                      };
-                      authorColors = {
-                        "*" = "#b4befe";
-                      };
-                    };
-                  };
+                  catppuccin.enable = true;
                 };
 
                 direnv = {
