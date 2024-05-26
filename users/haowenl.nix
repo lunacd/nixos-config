@@ -24,7 +24,7 @@
       nodePackages.typescript-language-server
       vscode-langservers-extracted
       nil
-      nixfmt
+      nixfmt-rfc-style
 
       # Containers
       minikube

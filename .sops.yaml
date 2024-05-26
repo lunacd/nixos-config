@@ -1,0 +1,7 @@
+keys:
+  - &main A10C8E252B0BAE95
+creation_rules:
+  - path_regex: secrets/secrets.yaml$
+    key_groups:
+    - pgp:
+      - *main

@@ -10,27 +10,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin.url = "github:catppuccin/nix";
-    home = {
-      url = "./home";
-      inputs.catppuccin.follows = "catppuccin";
-    };
-    configuration = {
-      url = "./configuration";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, catppuccin, home
-    , configuration, ... }: {
+  outputs = { self, nixpkgs, nixos-wsl, home-manager, catppuccin, sops-nix, ... }: {
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            nixos-wsl.nixosModules.default
+            sops-nix.nixosModules.sops
             catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
-            configuration.nixosModules.configuration
-            home.nixosModules.home
+            sops-nix.nixosModules.sops
+            ./configuration.nix
+            ./home.nix
           ];
         };
       };
