@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   catppuccin = {
     flavor = "mocha";
     accent = "green";
@@ -25,6 +24,7 @@
       nodePackages.typescript-language-server
       vscode-langservers-extracted
       nil
+      nixfmt
 
       # Containers
       minikube
@@ -34,7 +34,8 @@
       # True color
       COLORTERM = "truecolor";
       # Prettierd default configuration path
-      PRETTIERD_DEFAULT_CONFIG = "/home/haowenl/.config/haowenl/.prettierrc.json";
+      PRETTIERD_DEFAULT_CONFIG =
+        "/home/haowenl/.config/haowenl/.prettierrc.json";
     };
 
     stateVersion = "23.11";
@@ -57,9 +58,7 @@
       enable = true;
       catppuccin.enable = true;
 
-      shellAliases = {
-        lg = "lazygit";
-      };
+      shellAliases = { lg = "lazygit"; };
       shellInit = ''
         set -gx COLORTERM truecolor
       '';
@@ -77,7 +76,7 @@
         core.editor = "lvim";
         pull.ff = "only";
         init.defaultBranch = "main";
-        safe.directory = ["/etc/nixos"];
+        safe.directory = [ "/etc/nixos" ];
       };
     };
 
