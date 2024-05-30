@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   catppuccin = {
     flavor = "mocha";
     accent = "green";
@@ -10,6 +11,7 @@
       tree
       ripgrep
       fd
+      xsel
 
       # Editor
       neovim
@@ -34,8 +36,9 @@
       # True color
       COLORTERM = "truecolor";
       # Prettierd default configuration path
-      PRETTIERD_DEFAULT_CONFIG =
-        "/home/haowenl/.config/haowenl/.prettierrc.json";
+      PRETTIERD_DEFAULT_CONFIG = "/home/haowenl/.config/haowenl/.prettierrc.json";
+      EDITOR = "lvim";
+      SOPS_AGE_KEY_FILE = "/var/lib/sops-nix/key.txt";
     };
 
     stateVersion = "23.11";
@@ -52,13 +55,23 @@
   };
 
   programs = {
-    gpg.enable = true;
+    gpg = {
+      enable = true;
+      publicKeys = [
+        {
+          source = ../public/gpg.pub;
+          trust = "ultimate";
+        }
+      ];
+    };
 
     fish = {
       enable = true;
       catppuccin.enable = true;
 
-      shellAliases = { lg = "lazygit"; };
+      shellAliases = {
+        lg = "lazygit";
+      };
       shellInit = ''
         set -gx COLORTERM truecolor
       '';

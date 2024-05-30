@@ -1,6 +1,8 @@
-{ pkgs, ... }: let
+{ config, pkgs, ... }:
+let
   username = "haowenl";
-in {
+in
+{
   wsl.enable = true;
   wsl.defaultUser = username;
 
@@ -9,17 +11,23 @@ in {
   '';
 
   # For setting fish as default shell
-  programs = { fish.enable = true; };
+  programs = {
+    fish.enable = true;
+  };
 
   virtualisation.podman.enable = true;
 
+  users.mutableUsers = false;
   users.users.${username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     name = username;
     description = "Haowen Liu";
     shell = pkgs.fish;
+    hashedPasswordFile = config.sops.secrets.haowenlPassword.path;
   };
 
-  system = { stateVersion = "23.11"; };
+  system = {
+    stateVersion = "23.11";
+  };
 }

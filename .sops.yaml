@@ -1,7 +1,7 @@
 keys:
-  - &main A10C8E252B0BAE95
+  - &main age10u4pkl5as842g2tpc4hs48kkpg7rc2rv9n0x0wsg6guvjsyyw3aqu28vk7
 creation_rules:
-  - path_regex: secrets/secrets.yaml$
+  - path_regex: secrets/.*\.yaml$
     key_groups:
-    - pgp:
+    - age:
       - *main
