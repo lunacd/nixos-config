@@ -90,8 +90,17 @@
         pull.ff = "only";
         init.defaultBranch = "main";
         safe.directory = [ "/etc/nixos" ];
+        sendemail = {
+          annotate = true;
+          smtpserver = "smtp.migadu.com";
+          smtpuser = "lhw@lunacd.com";
+          smtpencryption = "tls";
+          smtpserverport = "587";
+        };
       };
     };
+
+    git-credential-oauth.enable = true;
 
     keychain = {
       enable = true;
