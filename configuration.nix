@@ -27,6 +27,18 @@ in
     hashedPasswordFile = config.sops.secrets.haowenlPassword.path;
   };
 
+  services = {
+    postgresql = {
+      enable = true;
+      enableJIT = true;
+    };
+    pgadmin = {
+      enable = true;
+      initialEmail = "lhw@lunacd.com";
+      initialPasswordFile = "/run/secrets/pgadminPassword";
+    };
+  };
+
   system = {
     stateVersion = "23.11";
   };

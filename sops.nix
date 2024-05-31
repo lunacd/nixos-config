@@ -41,5 +41,7 @@
       owner = config.users.users.haowenl.name;
       mode = "0400";
     };
+
+    pgadminPassword = {};
   };
 }
