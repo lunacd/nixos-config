@@ -41,6 +41,11 @@
       SOPS_AGE_KEY_FILE = "/var/lib/sops-nix/key.txt";
     };
 
+    file.lvimConfig = {
+      source = ../dotfiles/lvim.lua;
+      target = ".config/lvim/config.lua";
+    };
+
     stateVersion = "23.11";
   };
 
