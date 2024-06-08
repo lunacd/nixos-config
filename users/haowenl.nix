@@ -44,6 +44,9 @@
     file.lvimConfig = {
       source = ../dotfiles/lvim.lua;
       target = ".config/lvim/config.lua";
+      # lunarvim package creates an example config file
+      # This option forcedly replace that example config
+      force = true;
     };
 
     stateVersion = "23.11";
