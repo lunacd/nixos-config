@@ -43,5 +43,11 @@
     };
 
     pgadminPassword = {};
+
+    smtpPassword = {
+      path = "/home/haowenl/.smtpPass";
+      owner = config.users.users.haowenl.name;
+      mode = "0400";
+    };
   };
 }

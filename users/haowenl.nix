@@ -105,10 +105,11 @@
           smtpencryption = "tls";
           smtpserverport = "587";
         };
+        "credential \"smtp://smtp.migadu.com:587\"" = {
+          helper = "!f() { test \"$1\" = get && echo \"password=$(cat $HOME/.smtpPass)\"; }; f";
+        };
       };
     };
-
-    git-credential-oauth.enable = true;
 
     keychain = {
       enable = true;
