@@ -9,7 +9,7 @@ lvim.plugins = {
 lvim.colorscheme = "catppuccin-mocha"
 
 -- Installed binaries are not compatible with NixOS
-lvim.lsp.automatic_servers_installation = false
+lvim.lsp.installer.setup.automatic_installation = false
 
 -- Keybindings
 lvim.keys.normal_mode["H"] = "<cmd>BufferLineCyclePrev<cr>"
@@ -46,5 +46,6 @@ lvim.builtin.which_key.mappings["x"] = {
 -- Linters and formatters
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { name = "prettierd" }
+  { name = "prettierd" },
+  { name = "nixfmt" },
 }
