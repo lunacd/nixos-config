@@ -19,7 +19,7 @@
 
       # LSP, formatters, linters
       lua-language-server
-      clang-tools_17
+      clang-tools_18
       prettierd
       ruff
       shellcheck
@@ -27,6 +27,7 @@
       vscode-langservers-extracted
       nil
       nixfmt-rfc-style
+      cmake-language-server
 
       # Containers
       minikube
