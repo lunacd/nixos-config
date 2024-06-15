@@ -48,4 +48,9 @@ local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { name = "prettierd" },
   { name = "nixfmt" },
+  { name = "cmake_format" },
+}
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
 }

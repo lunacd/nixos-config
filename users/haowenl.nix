@@ -28,6 +28,7 @@
       nil
       nixfmt-rfc-style
       cmake-language-server
+      cmake-format
 
       # Containers
       minikube
