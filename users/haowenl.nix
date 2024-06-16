@@ -51,6 +51,14 @@
       force = true;
     };
 
+    file.gitGlobalExcludes = {
+      text = ''
+        /.direnv/
+        .envrc
+      '';
+      target = ".config/git/global_excludes";
+    };
+
     stateVersion = "23.11";
   };
 
@@ -97,6 +105,7 @@
       };
       extraConfig = {
         core.editor = "lvim";
+        core.excludesFile = "~/.config/git/global_excludes";
         pull.ff = "only";
         init.defaultBranch = "main";
         safe.directory = [ "/etc/nixos" ];
@@ -122,6 +131,9 @@
     lazygit = {
       enable = true;
       catppuccin.enable = true;
+      settings = {
+        git.overrideGpg = true;
+      };
     };
 
     direnv = {
