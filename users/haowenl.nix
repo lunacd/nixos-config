@@ -29,6 +29,7 @@
       nixfmt-rfc-style
       cmake-language-server
       cmake-format
+      taplo
 
       # Containers
       minikube
