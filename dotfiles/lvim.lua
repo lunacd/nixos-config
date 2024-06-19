@@ -54,3 +54,18 @@ formatters.setup {
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
 }
+
+-- CPS syntax highlighting
+local cps_autocommand = {
+  pattern = { "*.cps" },
+  command = "setfiletype cps"
+}
+lvim.autocommands = {
+  {
+    "BufEnter", cps_autocommand
+  },
+  {
+    "BufRead", cps_autocommand
+  }
+}
+vim.treesitter.language.register('json', 'cps')
