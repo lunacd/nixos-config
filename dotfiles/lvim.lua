@@ -11,6 +11,8 @@ lvim.colorscheme = "catppuccin-mocha"
 -- Installed binaries are not compatible with NixOS
 lvim.lsp.installer.setup.automatic_installation = false
 
+require'lspconfig'.taplo.setup{}
+
 -- Keybindings
 lvim.keys.normal_mode["H"] = "<cmd>BufferLineCyclePrev<cr>"
 lvim.keys.normal_mode["L"] = "<cmd>BufferLineCycleNext<cr>"
