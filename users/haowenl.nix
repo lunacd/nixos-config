@@ -60,6 +60,11 @@
       target = ".config/git/global_excludes";
     };
 
+    file.prettierDefaultConfig = {
+      source = ../dotfiles/.prettierrc.json;
+      target = ".config/haowenl/.prettierrc.json";
+    };
+
     stateVersion = "23.11";
   };
 
