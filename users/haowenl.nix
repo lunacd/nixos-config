@@ -55,7 +55,9 @@
     file.gitGlobalExcludes = {
       text = ''
         /.direnv/
-        .envrc
+        /.envrc
+        /build/
+        /.cache/
       '';
       target = ".config/git/global_excludes";
     };
