@@ -11,7 +11,7 @@ lvim.colorscheme = "catppuccin-mocha"
 -- Installed binaries are not compatible with NixOS
 lvim.lsp.installer.setup.automatic_installation = false
 
-require'lspconfig'.taplo.setup{}
+require 'lspconfig'.taplo.setup {}
 
 -- Keybindings
 lvim.keys.normal_mode["H"] = "<cmd>BufferLineCyclePrev<cr>"
@@ -50,7 +50,6 @@ local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { name = "prettierd" },
   { name = "nixfmt" },
-  { name = "cmake_format" },
 }
 
 local linters = require "lvim.lsp.null-ls.linters"
@@ -71,3 +70,6 @@ lvim.autocommands = {
   }
 }
 vim.treesitter.language.register('json', 'cps')
+
+-- vim options
+vim.o.autoread = true
